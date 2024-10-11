@@ -4,8 +4,33 @@
     <title>Pong</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-</html>
+
+</head>
 <body>
-    <canvas id="gameCanvas"></canvas>
+    <h1 id="p1_score" style="color: red;left:30%;position:absolute;display: inline;">0</h1>
+    <h1 style="color: black;left:50%;position:absolute;display: inline;">:</h1>
+    <h1 id="p2_score" style="color: blue;right:30%;position:absolute;display: inline;">0</h1>
+    <div>
+        <canvas id="gameCanvas" style="border: 1px solid black;"></canvas>
+        
+        <div id="overlayText" style="position: absolute; top: 50px; left: 50px; color: red;">
+            <button id="startButton"  onclick="document.getElementById('startButton').style.display='none'">Start</button>
+            <button id="pulan" style="position: absolute;" onclick="randomPosition()">Pula</button>
+            
+            
+            <script>
+                function randomPosition() {
+                    const button = document.getElementById('pulan');
+                    const randomX = Math.floor(Math.random() * (window.innerWidth - button.offsetWidth-100));
+                    const randomY = Math.floor(Math.random() * (window.innerHeight - button.offsetHeight-100));
+                    button.style.left = randomX + 'px';
+                    button.style.top = randomY + 'px';
+                }
+            </script>
+        </div>
+        
+
+    </div>
     <script src="script.js"></script>
 </body>
+</html>

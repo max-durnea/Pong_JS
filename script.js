@@ -4,7 +4,15 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let centerX = canvas.width / 2;
 let centerY = canvas.height / 2;
+//Menu
+let menu = document.getElementById('menu');
+let startButton = document.getElementById('startButton');
 
+
+
+
+let p1_score =0;
+let p2_score =0;
 let x = 100; // x position of the ball
 let y = 100; // y position of the ball
 let radius = 20; // radius of the ball
@@ -70,9 +78,17 @@ function animate() {
     y += dy;
 
     // Check for boundary collision with the canvas edges
-    if (x + radius > canvas.width || x - radius < 0) {
+    if (x + radius > canvas.width ) {
+        p1_score++;
+        document.getElementById('p1_score').innerHTML = p1_score;
         x = canvas.width / 2;
         y = canvas.height / 2; // Reset position if hitting left/right boundaries
+    }
+    else if (x - radius < 0) {
+        p2_score++;
+        document.getElementById('p2_score').innerHTML = p2_score;
+        x = canvas.width / 2;
+        y = canvas.height / 2;
     }
     if (y + radius > canvas.height || y - radius < 0) {
         dy = -dy; // Reverse the y velocity if hitting top/bottom boundaries
