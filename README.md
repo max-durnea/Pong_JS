@@ -1,1 +1,3 @@
-Game doesn't work properly, but the idea is there
+TODO:
+    Implement a scoring system
+    Create a start menu

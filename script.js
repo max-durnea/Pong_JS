@@ -14,6 +14,26 @@ let rightRectangleX = canvas.width - 100;
 let rightRectangleY = canvas.height / 2;
 let leftRectangleX = 100;
 let leftRectangleY = canvas.height / 2;
+let rectangleSpeed = 5;
+let keyState = {};
+function moveRectangles() {
+    if (keyState['ArrowUp']) {
+        rightRectangleY -= rectangleSpeed;
+    }
+    if (keyState['ArrowDown']) {
+        rightRectangleY += rectangleSpeed;
+    }
+    if (keyState['w']) {
+        leftRectangleY -= rectangleSpeed;
+    }
+    if (keyState['s']) {
+        leftRectangleY += rectangleSpeed;
+    }
+
+    // Prevent rectangles from moving out of bounds
+    rightRectangleY = Math.max(0, Math.min(canvas.height - 0.287 * canvas.height, rightRectangleY));
+    leftRectangleY = Math.max(0, Math.min(canvas.height - 0.287 * canvas.height, leftRectangleY));
+}
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -56,7 +76,15 @@ function animate() {
     if (y + radius > canvas.height || y - radius < 0) {
         dy = -dy; // Reverse the y velocity if hitting top/bottom boundaries
     }
-
+    if (x + radius > rightRectangleX && x + radius<rightRectangleX+0.033*canvas.width && y > rightRectangleY && y < rightRectangleY + 0.287 * canvas.height) {
+        dx = -dx; // Reverse the x velocity if hitting the right rectangle
+        x-=10; // Move the ball back to prevent it from getting stuck
+    }
+    if (x - radius < leftRectangleX + 0.033 * canvas.width && x > leftRectangleX && y > leftRectangleY && y < leftRectangleY + 0.287 * canvas.height) {
+        dx = -dx;
+        x+=10;
+    }
+    moveRectangles();
     requestAnimationFrame(animate);
 }
 
@@ -64,19 +92,10 @@ animate();
 window.addEventListener('resize', resizeCanvas);
 window.addEventListener('resize', repositionRectangle);
 document.addEventListener('keydown', function(e) {
-    const key = e.key;
-    if (key === 'ArrowUp') {
-        rightRectangleY -= 20;
-    }
-    if (key === 'ArrowDown') {
-        rightRectangleY += 20;
-    }
-    if (key === 'w') {
-        leftRectangleY -= 20;
-    }
-    if (key === 's') {
-        leftRectangleY += 20;
-    }
+    keyState[e.key] = true;
+});
+document.addEventListener('keyup', function(e) {
+    keyState[e.key] = false;
 });
 
 
