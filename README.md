@@ -1,3 +1,3 @@
 TODO:
-    Implement a scoring system
+    Implement a scoring system;
     Create a start menu
