@@ -51,7 +51,8 @@ function repositionRectangle() {
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+    dx=0.004*canvas.width*Math.sign(dx);
+    dy=0.007*canvas.height*Math.sign(dy);
     // Draw ball
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
