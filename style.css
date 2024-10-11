@@ -1,0 +1,6 @@
+html, body {
+    overflow: hidden; /* Prevent scrolling */
+    height: 100%; /* Ensure full height */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
